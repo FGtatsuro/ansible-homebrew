@@ -1,2 +1,16 @@
 ---
 # tasks file for homebrew(On OSX)
+- name: Create a directory for homebrew
+  file:
+    path: "{{ homebrew_prefix }}"
+    state: "directory"
+    owner: "{{ ansible_user_id }}"
+    group: "admin"
+    mode: "0755"
+    recurse: yes
+  become: yes
+- name: Clone homebrew
+  git:
+    repo: "git://github.com/Homebrew/homebrew.git"
+    dest: "{{ homebrew_prefix }}"
+    accept_hostkey: yes
