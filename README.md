@@ -17,6 +17,15 @@ Role Variables
 
 The variables we can use in this role.
 
+|name|description|default|
+|---|---|---|
+|homebrew_prefix|Directory for homebrew related files.|/usr/local|
+
+- `homebrew_prefix` direcotry and files under it
+  - are owned by user playbook executes.
+  - are grouped by admin.
+  - have file mode 0755
+
 Role Dependencies
 -----------------
 

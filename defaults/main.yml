@@ -1,2 +1,3 @@
 ---
 # defaults file for homebrew
+homebrew_prefix: "/usr/local"
