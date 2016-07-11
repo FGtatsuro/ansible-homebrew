@@ -1,0 +1,5 @@
+roles/*
+!roles/homebrew
+
+# Ansible
+tests/*.retry
