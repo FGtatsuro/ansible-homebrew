@@ -14,3 +14,4 @@
     repo: "git://github.com/Homebrew/homebrew.git"
     dest: "{{ homebrew_prefix }}"
     accept_hostkey: yes
+    update: no
