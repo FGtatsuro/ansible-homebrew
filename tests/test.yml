@@ -3,3 +3,6 @@
   remote_user: root
   roles:
     - { role: homebrew }
+  tasks:
+    - homebrew: name=gawk
+    - homebrew_cask: name=iterm2
