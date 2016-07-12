@@ -21,6 +21,11 @@ The variables we can use in this role.
 |---|---|---|
 |homebrew_prefix|Directory for homebrew related files.<br>homebrew is installed only if `homebrew_prefix`/bin/brew doesn't exist.|/usr/local|
 
+- `homebrew_prefix` direcotry
+  - is owned by user playbook executes.
+  - is grouped by admin.
+  - has file mode 0755
+
 Role Dependencies
 -----------------
 
