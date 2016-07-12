@@ -1,6 +1,6 @@
 ---
 # tasks file for homebrew(On OSX)
-- name: Create a directory for homebrew
+- name: Ensure directory for homebrew
   file:
     path: "{{ homebrew_prefix }}"
     state: "directory"
@@ -8,12 +8,15 @@
     group: "admin"
     mode: "0755"
   become: yes
-- name: Clone homebrew
-  git:
-    repo: "git://github.com/Homebrew/homebrew.git"
-    dest: "{{ homebrew_prefix }}"
-    accept_hostkey: yes
-    update: no
+- name: Check whether homebrew is already installed
+  stat: path="{{ homebrew_prefix }}/bin/brew"
+  register: stat_homebrew
+  changed_when: no
+- name: Install homebrew
+  shell: "/bin/bash -o pipefail -c 'curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz -m --strip 1'"
+  args:
+    chdir: "{{ homebrew_prefix }}"
+  when: not stat_homebrew.stat.exists
 - name: Update homebrew
   command: "{{ homebrew_prefix }}/bin/brew update"
   register: result_homebrew_update
