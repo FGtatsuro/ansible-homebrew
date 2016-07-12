@@ -1,22 +1,21 @@
 ---
 # tasks file for homebrew(On OSX)
+- name: Ensure directory for homebrew
+  file:
+    path: "{{ homebrew_prefix }}"
+    state: "directory"
+    owner: "{{ ansible_user_id }}"
+    group: "admin"
+    mode: "0755"
+  become: yes
 - name: Check whether homebrew is already installed
   stat: path="{{ homebrew_prefix }}/bin/brew"
   register: stat_homebrew
   changed_when: no
-- block:
-  - name: Create a directory for homebrew
-    file:
-      path: "{{ homebrew_prefix }}"
-      state: "directory"
-      owner: "{{ ansible_user_id }}"
-      group: "admin"
-      mode: "0755"
-    become: yes
-  - name: Install homebrew
-    shell: "/bin/bash -o pipefail -c 'curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz -m --strip 1'"
-    args:
-      chdir: "{{ homebrew_prefix }}"
+- name: Install homebrew
+  shell: "/bin/bash -o pipefail -c 'curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz -m --strip 1'"
+  args:
+    chdir: "{{ homebrew_prefix }}"
   when: not stat_homebrew.stat.exists
 - name: Update homebrew
   command: "{{ homebrew_prefix }}/bin/brew update"
