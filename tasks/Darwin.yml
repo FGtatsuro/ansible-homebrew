@@ -7,7 +7,6 @@
     owner: "{{ ansible_user_id }}"
     group: "admin"
     mode: "0755"
-    recurse: yes
   become: yes
 - name: Clone homebrew
   git:
@@ -15,3 +14,7 @@
     dest: "{{ homebrew_prefix }}"
     accept_hostkey: yes
     update: no
+- name: Update homebrew
+  command: "{{ homebrew_prefix }}/bin/brew update"
+  register: result_homebrew_update
+  changed_when: "'No changes to formulae' not in result_homebrew_update.stdout"

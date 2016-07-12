@@ -12,7 +12,6 @@ matrix:
         # Workaround for OSX.
         - sudo pip install -U setuptools
         - sudo pip install ansible
-        - ansible-galaxy install -r role_requirements.yml
         - bundle install
       env:
         - TARGET=localhost
@@ -22,11 +21,6 @@ matrix:
 # This role needs sudo, thus we can't use the new container infrastructure
 # sudo: false
 sudo: required
-
-install:
-  - pip install ansible
-  - ansible-galaxy install -r role_requirements.yml
-  - bundle install
 
 script:
   # Basic role syntax check
