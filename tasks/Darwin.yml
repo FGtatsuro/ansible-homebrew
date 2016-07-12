@@ -14,3 +14,7 @@
     dest: "{{ homebrew_prefix }}"
     accept_hostkey: yes
     update: no
+- name: Update homebrew
+  command: "{{ homebrew_prefix }}/bin/brew update"
+  register: result_homebrew_update
+  changed_when: "'No changes to formulae' not in result_homebrew_update.stdout"
