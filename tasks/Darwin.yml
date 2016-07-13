@@ -20,4 +20,4 @@
 - name: Update homebrew
   command: "{{ homebrew_prefix }}/bin/brew update"
   register: result_homebrew_update
-  changed_when: "'No changes to formulae' not in result_homebrew_update.stdout"
+  changed_when: "'Already up-to-date' not in result_homebrew_update.stdout"
